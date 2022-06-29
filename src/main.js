@@ -16,17 +16,17 @@ const vueLifecycles = singleSpaVue({
 
 export const bootstrap = vueLifecycles.bootstrap
 export const mount = (props) => {
-  let el = document.getElementById("product-cart")
-  if (!el) {
-    el = document.createElement("div")
-    el.id = "product-cart"
-    document.body.appendChild(el)
-    props.store = {
-      state: {
-        count: 0,
-      },
+  return new Promise(() => {
+    if (props.singleSpa.getMountedApps().indexOf("product-detail") !== -1) {
+      console.log("test have product-detail ", props.singleSpa.getMountedApps())
+      return vueLifecycles.mount(props)
+    } else {
+      console.log(
+        "test haven't product-detail ",
+        props.singleSpa.getMountedApps()
+      )
+      setTimeout(() => vueLifecycles.mount(props), 1000)
     }
-  }
-  return vueLifecycles.mount(props)
+  })
 }
 export const unmount = vueLifecycles.unmount
