@@ -1,12 +1,6 @@
 <template>
      <div id="container-product-cart">
-      <div class="top-content">
-        <div class="container-cart">
-          <div class="cart-border">
-            <span class="cart">Cart: {{store.state.count}} items</span>
-          </div>
-        </div>
-      </div>
+      <cart :text="'Cart: ' + store.state.count + ' items'"></cart>
       <div class="bottom-content">
         <div class="container-btn-buy cart-border">
           <button class="buy-btn"  @click="addToCart()">
@@ -28,9 +22,10 @@
     t_fendt: '54,00 $',
     t_eicher: '58,00 $',
   };
-
+import { Cart } from "mfe-share-lib"
 export default {
     props: ['store'],
+    components: { Cart },
     data: () => ({
       priceList,
     }),
@@ -47,16 +42,6 @@ export default {
 
 }
 
-.column-2 .top-content{
-  height: 30%;
-  display: flex;
-  flex-direction: column;
-}
-
-.column-2 .top-content .container-cart{
-  text-align: end;
-}
-
 .cart-border{
   display: inline-block;
   border: 2px dashed blue
@@ -66,16 +51,6 @@ export default {
   margin-top: 30px;
   color: blue;
   text-align: start;
-}
-
-.column-2 .top-content .container-cart .cart{
-  background: green;
-  padding: 8px 15px;
-  margin: 12px;
-  border-radius: 4px;
-  color: #fff;
-  box-sizing: border-box;
-  line-height: 52px;
 }
 
 #container-product-cart .bottom-content{
